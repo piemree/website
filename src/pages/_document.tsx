@@ -1,9 +1,11 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
-export default function Document() {
+export default function Document(ctx: any) {
+  console.log(ctx.locale);
+
   return (
-    <Html lang="en">
-      <Head />
+    <Html lang={ctx.locale}>
+      <Head/>
       <body>
         <Main />
         <NextScript />

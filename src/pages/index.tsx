@@ -1,118 +1,393 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import {
+  FaGitAlt,
+  FaGithub,
+  FaReact,
+  FaDocker,
+  FaNodeJs,
+} from "react-icons/fa";
+import { RiNextjsFill, RiTailwindCssFill, RiVuejsFill } from "react-icons/ri";
+import { BiLogoPostgresql } from "react-icons/bi";
+import {
+  SiMongodb,
+  SiPrisma,
+  SiNginx,
+  SiExpress,
+  SiNestjs,
+  SiRedis,
+  SiRabbitmq,
+} from "react-icons/si";
+import translation from "../translate";
+import Head from "next/head";
+import { useState } from "react";
+import clsx from "clsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+type HomeProps = {
+  locale: string;
+};
+
+export default function Home({ locale }: HomeProps) {
+  const [sending, setSending] = useState(false);
+  const [mailName, setMailName] = useState("");
+  const [mailEmail, setMailEmail] = useState("");
+  const [mailMessage, setMailMessage] = useState("");
+  const [mailInfo, setMailInfo] = useState("");
+
+  translation.changeLanguage(locale);
+
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSending(true);
+
+    try {
+      const body = {
+        name: mailName,
+        email: mailEmail,
+        message: mailMessage,
+      };
+      const response = await fetch("/api/sendmail", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      setMailName("");
+      setMailEmail("");
+      setMailMessage("");
+      setMailInfo(translation.t("form.success"));
+    } catch (error) {
+      console.error(error);
+      setMailInfo(translation.t("form.error"));
+    } finally {
+      setSending(false);
+      setTimeout(() => {
+        setMailInfo("");
+      }, 5000);
+    }
+  };
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+    <>
+      <Head>
+        <link rel="shortcut icon" href="/terminal.svg" />
+        <title>{translation.t("page.title")}</title>
+        <meta name="description" content={translation.t("page.desc")} />
+        <meta name="keywords" content={translation.t("page.keywords")} />
+      </Head>
+      <main className={`min-h-screen bg-[#0F172A]  ${inter.className}`}>
+        <nav className="flex justify-between items-center h-16  border-b-2 border-white max-w-4xl  pr-4 fixed w-full z-10 bg-transparent backdrop-blur-md left-1/2  transform -translate-x-1/2 ">
           <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/"
+            className="text-white font-bold text-xl whitespace-nowrap flex items-center gap-1"
           >
-            By{" "}
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+              src="/terminal.svg"
+              alt="Emre Demir"
+              width={50}
+              height={50}
+              className="rounded-full"
             />
+            <span>Emre Demir</span>
           </a>
-        </div>
-      </div>
+          <ul className="flex gap-4">
+            <li className="text-white font-bold text-sm md:text-lg hover:underline">
+              <a href="#contact">{translation.t("contact")}</a>
+            </li>
+            <li className="text-white font-bold text-sm md:text-lg hover:underline">
+              <a href="https://github.com/piemree">Github</a>
+            </li>
+          </ul>
+        </nav>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        <section className="flex flex-col md:flex-row items-center justify-between max-w-4xl mx-auto px-4 pt-14">
+          <div className="order-2 md:order-1 text-white text-lg font-light leading-8 flex-1">
+            <h1 className="text-white text-3xl font-bold  mt-8">
+              {translation.t("title")}
+            </h1>
+            <p className="mt-4 text-white text-lg font-light leading-8">
+              {translation.t("desc")}
+            </p>
+          </div>
+          <div className="order-1 md:order-2 flex justify-center flex-1 mt-8">
+            <Image
+              src="/avatar.svg"
+              alt="Emre Demir"
+              width={200}
+              height={200}
+              className="rounded-full"
+            />
+          </div>
+        </section>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
+        <section className=" text-white max-w-4xl mx-auto px-4 py-8">
+          <h2 className="text-white text-2xl font-bold max-w-4xl mx-auto  mt-8">
+            {translation.t("skills")}
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          <h4 className="text-white text-lg font-bold max-w-4xl mx-auto mt-4">
+            {translation.t("frontend")}
+          </h4>
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://reactjs.org/"
+                className="flex flex-col items-center hover:text-blue-400"
+              >
+                <FaReact className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">React</h3>
+              </a>
+            </li>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://nextjs.org/"
+                className="flex flex-col items-center hover:text-gray-400"
+              >
+                <RiNextjsFill className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Next.js</h3>
+              </a>
+            </li>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://tailwindcss.com/"
+                className="flex flex-col items-center hover:text-blue-400"
+              >
+                <RiTailwindCssFill className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Tailwind</h3>
+              </a>
+            </li>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://vuejs.org/"
+                className="flex flex-col items-center hover:text-green-400"
+              >
+                <RiVuejsFill className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Vue.js</h3>
+              </a>
+            </li>
+          </ul>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
+          <h4 className="text-white text-lg font-bold max-w-4xl mx-auto mt-8">
+            {translation.t("backend")}
+          </h4>
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://nodejs.org/"
+                className="flex flex-col items-center hover:text-green-400"
+              >
+                <FaNodeJs className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Node.js</h3>
+              </a>
+            </li>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://expressjs.com/"
+                className="flex flex-col items-center hover:text-gray-400"
+              >
+                <SiExpress className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Express.js</h3>
+              </a>
+            </li>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://nestjs.com/"
+                className="flex flex-col items-center hover:text-red-600"
+              >
+                <SiNestjs className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Nest.js</h3>
+              </a>
+            </li>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://redis.io/"
+                className="flex flex-col items-center hover:text-red-600"
+              >
+                <SiRedis className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Redis</h3>
+              </a>
+            </li>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://www.rabbitmq.com/"
+                className="flex flex-col items-center hover:text-orange-500"
+              >
+                <SiRabbitmq className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">RabbitMQ</h3>
+              </a>
+            </li>
+
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://www.prisma.io/"
+                className="flex flex-col items-center hover:text-gray-400"
+              >
+                <SiPrisma className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Prisma</h3>
+              </a>
+            </li>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://www.mongodb.com/"
+                className="flex flex-col items-center hover:text-green-400"
+              >
+                <SiMongodb className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">MongoDB</h3>
+              </a>
+            </li>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://www.postgresql.org/"
+                className="flex flex-col items-center hover:text-blue-400"
+              >
+                <BiLogoPostgresql className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">PostgreSQL</h3>
+              </a>
+            </li>
+          </ul>
+          <h4 className="text-white text-lg font-bold max-w-4xl mx-auto mt-8">
+            DevOps
+          </h4>
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://www.docker.com/"
+                className="flex flex-col items-center hover:text-blue-400"
+              >
+                <FaDocker className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Docker</h3>
+              </a>
+            </li>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://www.nginx.com/"
+                className="flex flex-col items-center hover:text-green-400"
+              >
+                <SiNginx className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Nginx</h3>
+              </a>
+            </li>
+          </ul>
+          <h4 className="text-white text-lg font-bold max-w-4xl mx-auto mt-8">
+            {translation.t("versionControl")}
+          </h4>
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://github.com"
+                className="flex flex-col items-center hover:text-gray-400"
+              >
+                <FaGithub className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Github</h3>
+              </a>
+            </li>
+            <li className="bg-[#1A202C] p-4 rounded-lg ">
+              <a
+                target="_blank"
+                href="https://git-scm.com/"
+                className="flex flex-col items-center hover:text-red-600"
+              >
+                <FaGitAlt className="text-4xl" />
+                <h3 className="text-lg font-bold mt-2">Git</h3>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section id="contact" className="max-w-4xl mx-auto px-4 py-8">
+          <h2 className="text-white text-2xl font-bold max-w-4xl mx-auto  mt-8">
+            {translation.t("contact")}
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <form
+            onSubmit={onFormSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4  mt-4"
+          >
+            <div className=" rounded-lg col-span-2 md:col-span-1">
+              <label htmlFor="name" className="text-white text-lg font-bold">
+                {translation.t("name")}
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                value={mailName}
+                onChange={(e) => setMailName(e.target.value)}
+                className="w-full bg-[#0F172A]  text-white p-2 mt-2 rounded-lg border border-white"
+              />
+            </div>
+            <div className="rounded-lg col-span-2 md:col-span-1">
+              <label htmlFor="email" className="text-white text-lg font-bold">
+                {translation.t("email")}
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                value={mailEmail}
+                onChange={(e) => setMailEmail(e.target.value)}
+                className="w-full bg-[#0F172A] text-white p-2 mt-2 rounded-lg border border-white"
+              />
+            </div>
+            <div className="col-span-2  rounded-lg">
+              <label htmlFor="message" className="text-white text-lg font-bold">
+                {translation.t("message")}
+              </label>
+              <textarea
+                name="message"
+                required
+                value={mailMessage}
+                onChange={(e) => setMailMessage(e.target.value)}
+                className="w-full block bg-[#0F172A] text-white p-2 mt-2 rounded-lg border border-white"
+              ></textarea>
+            </div>
+            <div className="col-span-2 flex gap-2">
+              <button
+                type="submit"
+                className={clsx(
+                  "bg-[#1A202C] text-white text-lg font-bold px-6 py-2 rounded-lg",
+                  {
+                    "opacity-50 cursor-not-allowed": sending,
+                  }
+                )}
+              >
+                {translation.t("send")}
+              </button>
+              {mailInfo && (
+                <span className="text-white text-sm block">{mailInfo}</span>
+              )}
+            </div>
+          </form>
+        </section>
+      </main>
+    </>
   );
+}
+
+export async function getServerSideProps(ctx: any) {
+  return {
+    props: {
+      locale: ctx.locale,
+    },
+  };
 }
