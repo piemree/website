@@ -85,7 +85,7 @@ export default function Home({ locale }: HomeProps) {
             href="/"
             className="text-white font-bold text-xl whitespace-nowrap flex items-center gap-1"
           >
-            <Image
+            <img
               src="/terminal.svg"
               alt="page-icon"
               width={50}
@@ -114,7 +114,7 @@ export default function Home({ locale }: HomeProps) {
             </p>
           </div>
           <div className="order-1 md:order-2 flex justify-center flex-1 mt-8">
-            <Image
+            <img
               src="/avatar.svg"
               alt="user-picture"
               width={200}
