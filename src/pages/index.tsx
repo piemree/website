@@ -380,6 +380,13 @@ export default function Home({ locale }: HomeProps) {
             </div>
           </form>
         </section>
+        <footer className="text-white text-sm font-light text-center py-4 border-t-2 max-w-4xl mx-auto">
+          <p className="">
+            <a href="mailto:contact@emredemir.tech"
+            className="hover:underline"
+            >contact@emredemir.tech</a>
+          </p>
+        </footer>
       </main>
     </>
   );
