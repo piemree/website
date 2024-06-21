@@ -87,7 +87,7 @@ export default function Home({ locale }: HomeProps) {
           >
             <Image
               src="/terminal.svg"
-              alt="Emre Demir"
+              alt="page-icon"
               width={50}
               height={50}
               className="rounded-full"
@@ -116,7 +116,7 @@ export default function Home({ locale }: HomeProps) {
           <div className="order-1 md:order-2 flex justify-center flex-1 mt-8">
             <Image
               src="/avatar.svg"
-              alt="Emre Demir"
+              alt="user-picture"
               width={200}
               height={200}
               className="rounded-full"
@@ -128,9 +128,9 @@ export default function Home({ locale }: HomeProps) {
           <h2 className="text-white text-2xl font-bold max-w-4xl mx-auto  mt-8">
             {translation.t("skills")}
           </h2>
-          <h4 className="text-white text-lg font-bold max-w-4xl mx-auto mt-4">
+          <h3 className="text-white text-lg font-bold max-w-4xl mx-auto mt-4">
             {translation.t("frontend")}
-          </h4>
+          </h3>
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
             <li className="bg-[#1A202C] p-4 rounded-lg ">
               <a
@@ -175,9 +175,9 @@ export default function Home({ locale }: HomeProps) {
             </li>
           </ul>
 
-          <h4 className="text-white text-lg font-bold max-w-4xl mx-auto mt-8">
+          <h3 className="text-white text-lg font-bold max-w-4xl mx-auto mt-8">
             {translation.t("backend")}
-          </h4>
+          </h3>
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
             <li className="bg-[#1A202C] p-4 rounded-lg ">
               <a
@@ -262,9 +262,9 @@ export default function Home({ locale }: HomeProps) {
               </a>
             </li>
           </ul>
-          <h4 className="text-white text-lg font-bold max-w-4xl mx-auto mt-8">
+          <h3 className="text-white text-lg font-bold max-w-4xl mx-auto mt-8">
             DevOps
-          </h4>
+          </h3>
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
             <li className="bg-[#1A202C] p-4 rounded-lg ">
               <a
@@ -287,9 +287,9 @@ export default function Home({ locale }: HomeProps) {
               </a>
             </li>
           </ul>
-          <h4 className="text-white text-lg font-bold max-w-4xl mx-auto mt-8">
+          <h3 className="text-white text-lg font-bold max-w-4xl mx-auto mt-8">
             {translation.t("versionControl")}
-          </h4>
+          </h3>
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
             <li className="bg-[#1A202C] p-4 rounded-lg ">
               <a
@@ -354,6 +354,7 @@ export default function Home({ locale }: HomeProps) {
                 {translation.t("message")}
               </label>
               <textarea
+                id="message"
                 name="message"
                 required
                 value={mailMessage}
