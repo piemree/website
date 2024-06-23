@@ -74,13 +74,6 @@ export default function Home({ locale }: HomeProps) {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href="/terminal.svg" />
-        <link
-          rel="icon"
-          type="image/svg+xml"
-          href="/favicon.svg"
-        />
-        <link rel="icon" type="image/png" href="/favicon.png" />
         <title>{translation.t("page.title")}</title>
         <meta name="description" content={translation.t("page.desc")} />
         <meta name="keywords" content={translation.t("page.keywords")} />
