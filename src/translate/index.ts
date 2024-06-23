@@ -23,7 +23,7 @@ i18next.init({
         },
         page: {
           title: "Emre Demir | Full Stack Developer",
-          desc: "Talented Full Stack Developer",
+          desc: "I'm a software Full Stack Develper based in Bursa, Turkey. I'm passionate about building software that helps people and businesses.",
           keywords:
             "Emre Demir, Developer, Software Developer, Web Developer, Fullstack Developer, Software Engineer, Coding, Programming, React Developer, Nodejs Developer, Express Developer, Experienced Developer, New Developer, Bursa Developer, Affordable Developer, Fast Developer, Reliable Developer, Creative Developer, Problem Solver Developer",
         },
@@ -49,7 +49,7 @@ i18next.init({
         },
         page: {
           title: "Emre Demir | Full Stack Developer",
-          desc: "Yetenekli Full Stack Developer",
+          desc: "Bursa, Türkiye'de yaşayan bir Full Stack Develper'ım. İnsanlara ve işletmelere yardımcı olan yazılımlar geliştirmekten keyif alıyorum.",
           keywords:
             "Emre Demir, Geliştirici, Developer, Yazılım Geliştirici, Web Developer, Fullstack Geliştirici, Yazılım Mühendisi, Kodlama, Programlama, Nodejs Developer, Express Developer, React Geliştirici, Deneyimli Yazılımcı, Yeni Geliştirici, Bursa Geliştirici, Bursa Developer, Bursa Web Developer, Uygun Fiyatlı Yazılımcı, Hızlı Yazılımcı, Güvenilir Geliştirici, Yaratıcı Geliştirici, Sorun Çözücü Geliştirici",
         },
