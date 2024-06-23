@@ -75,6 +75,12 @@ export default function Home({ locale }: HomeProps) {
     <>
       <Head>
         <link rel="shortcut icon" href="/terminal.svg" />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/favicon.svg"
+        />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <title>{translation.t("page.title")}</title>
         <meta name="description" content={translation.t("page.desc")} />
         <meta name="keywords" content={translation.t("page.keywords")} />
@@ -382,9 +388,9 @@ export default function Home({ locale }: HomeProps) {
         </section>
         <footer className="text-white text-sm font-light text-center py-4 border-t-2 max-w-4xl mx-auto">
           <p className="">
-            <a href="mailto:contact@emredemir.tech"
-            className="hover:underline"
-            >contact@emredemir.tech</a>
+            <a href="mailto:contact@emredemir.tech" className="hover:underline">
+              contact@emredemir.tech
+            </a>
           </p>
         </footer>
       </main>
