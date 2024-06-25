@@ -39,7 +39,7 @@ export default function Layout({ title, description, children }: LayoutProps) {
               <Link href="/blog">Blog</Link>
             </li>
             <li className="text-white font-bold text-sm md:text-lg hover:underline">
-              <Link href="/#contact">{translation.t("contact")}</Link>
+              <Link href="/#contact">İletişim</Link>
             </li>
             <li className="text-white font-bold text-sm md:text-lg hover:underline">
               <a href="https://github.com/piemree">Github</a>
