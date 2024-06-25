@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "javascriptde-call-stack-nedir",
+    "title": "JavaScript'de Call Stack Nedir?",
+    "description": "JavaScript'de call stack, yürütülen fonksiyonların sıralı bir biçimde yönetildiği, bir nevi 'çağrı defteri' görevi gören yapının adıdır. Bu yapı, fonksiyonların hangi sırayla ve ne zaman çağrıldığını, hangi fonksiyonların şu anda aktif olduğunu takip eder. JavaScript, tek iş parçacıklı bir programlama dili olduğu için, bir anda yalnızca bir işlem yürütülebilir. Bu tekil yürütme sürecini düzenlemek için call stack kullanılır.",
+    "timestamp": 1719301841
+  },
+  {
+    "slug": "javascriptde-primitive-types-ilkel-tipler",
+    "title": "JavaScript'de Primitive Types (İlkel Tipler)",
+    "description": "JavaScript, verileri saklamak ve işlemek için çeşitli veri türlerine sahiptir. Bu veri türlerinden ilkel tipler (primitive types), JavaScript'in en temel veri yapı taşlarıdır. İlkel tipler, doğrudan değerleriyle işlem görürler ve bellekte sabit bir alan kaplarlar. JavaScript'teki ilkel tipler şunlardır: `Number`, `String`, `Boolean`, `undefined`, `null`, `Symbol` ve ECMAScript 2020 ile tanıtılan `BigInt`.",
+    "timestamp": 1719388241
+  }
+]
