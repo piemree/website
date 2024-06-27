@@ -14,15 +14,13 @@ import remarkGfm from "remark-gfm";
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import { useEffect } from "react";
+import { findTopics } from "@/lib/mongoose";
 
 export const getStaticPaths = (async () => {
-  const fullPath = path.join(postsDirectory, `posts.json`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const topics = await findTopics();
 
-  // Use gray-matter to parse the post metadata section
-  const allPosts = JSON.parse(fileContents);
 
-  const paths = allPosts.map((post: any) => ({
+  const paths = topics.map((post: any) => ({
     params: { slug: post.slug },
   }));
 
@@ -34,7 +32,8 @@ export const getStaticPaths = (async () => {
 
 export const getStaticProps = (async (context) => {
   const slug = context.params?.slug as string | undefined;
-  const postData = await getPostData(slug as string);
+  const topics = await findTopics({ slug });
+  const postData = topics[0];
   if (!postData) {
     return {
       notFound: true,
@@ -47,9 +46,8 @@ export const getStaticProps = (async (context) => {
   };
 }) satisfies GetStaticProps;
 
-type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function Page({ postData }: PageProps) {
+export default function Page({ postData }: any) {
   const highlightCode = () => {
     const nodes = document.querySelectorAll("pre code");
     nodes.forEach((node: any) => hljs.highlightBlock(node));
@@ -60,7 +58,7 @@ export default function Page({ postData }: PageProps) {
   }, []);
 
   return (
-    <Layout title={postData?.title} description={postData?.description}>
+    <Layout title={postData?.title} description={postData?.siteDescription}>
       <article className="markdown-body">
         <Markdown remarkPlugins={[remarkGfm]}>{postData.markdown}</Markdown>
       </article>

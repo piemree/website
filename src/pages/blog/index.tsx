@@ -3,33 +3,26 @@ import { getPostList } from "@/lib/post";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import moment from "moment";
+import { findTopics } from "@/lib/mongoose";
 
 export const getStaticProps = (async (context) => {
-  const postList = await getPostList();
+  const topics = await findTopics();
+
   return {
     props: {
-      postList,
+      postList: topics,
     },
   };
 }) satisfies GetStaticProps;
 
-type PageProps = {
-  postList: {
-    slug: string;
-    title: string;
-    description: string;
-    timestamp: number;
-  }[];
-};
-
-export default function Page({ postList }: PageProps) {
+export default function Page({ postList }: any) {
   return (
     <Layout
       title="Emre Demir | Blog"
       description="Kişisel blog yazılarıma buradan ulaşabilirsiniz."
     >
       <ul className="text-lg font-light mt-4 sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-        {postList.map((post) => (
+        {postList.map((post: any) => (
           <li
             key={post.slug}
             className="border-b-2 border-gray-300 border-opacity-10 last:border-b-0 "
@@ -39,9 +32,9 @@ export default function Page({ postList }: PageProps) {
               className="hover:underline py-4  w-full block"
             >
               {post.title}
-              <p className="text-sm font-light text-gray-400 mt-4">
+              {/* <p className="text-sm font-light text-gray-400 mt-4">
                 {moment.unix(post.timestamp).format("DD/MM/YYYY")}
-              </p>
+              </p> */}
             </Link>
           </li>
         ))}

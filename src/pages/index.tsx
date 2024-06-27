@@ -22,12 +22,9 @@ import Layout from "@/components/Layout";
 import Link from "next/link";
 import { GetStaticProps } from "next";
 import { getPostList, PostData } from "@/lib/post";
+import { findTopics } from "@/lib/mongoose";
 
-type PageProps = {
-  postList: PostData[];
-};
-
-export default function Page({ postList }: PageProps) {
+export default function Page({ postList }: any) {
   const [sending, setSending] = useState(false);
   const [mailName, setMailName] = useState("");
   const [mailEmail, setMailEmail] = useState("");
@@ -104,20 +101,20 @@ export default function Page({ postList }: PageProps) {
           Blog Yazıları
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          {postList.map((post) => (
+          {postList.map((post: any) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
               className="bg-[#1A202C] p-4 rounded-lg hover:bg-[#2D3748]"
             >
               <h3 className="text-lg font-bold">{post.title}</h3>
-              <p className="text-sm mt-2">
-                {post.description
+              {/* <p className="text-sm mt-2">
+                {post.siteDescription
                   .split(" ")
                   .slice(0, 30)
                   .join(" ")
                   .concat("...")}
-              </p>
+              </p> */}
             </Link>
           ))}
         </div>
@@ -391,11 +388,11 @@ export default function Page({ postList }: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const postList = await getPostList();
+  const topics = await findTopics();
 
   return {
     props: {
-      postList: postList.slice(0, 3),
+      postList: topics.slice(0, 6) || [],
     },
   };
 };
