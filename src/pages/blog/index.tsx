@@ -21,7 +21,7 @@ export default function Page({ postList }: any) {
       title="Emre Demir | Blog"
       description="Kişisel blog yazılarıma buradan ulaşabilirsiniz."
     >
-      <ul className="text-lg font-light mt-4 sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+      <ul className="text-lg font-light mt-4 sm:text-xl md:text-2xl ">
         {postList.map((post: any) => (
           <li
             key={post.slug}
