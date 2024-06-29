@@ -107,7 +107,7 @@ export default function Page({ postList }: any) {
               href={`/blog/${post.slug}`}
               className="bg-[#1A202C] p-4 rounded-lg hover:bg-[#2D3748]"
             >
-              <h3 className="text-lg font-bold">{post.title}</h3>
+              <h3 className="text-lg font-bold text-white">{post.title}</h3>
               {/* <p className="text-sm mt-2">
                 {post.siteDescription
                   .split(" ")

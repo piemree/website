@@ -29,7 +29,7 @@ export default function Page({ postList }: any) {
           >
             <Link
               href={`/blog/${post.slug}`}
-              className="hover:underline py-4  w-full block"
+              className="hover:underline py-4  w-full block text-white"
             >
               {post.title}
               {/* <p className="text-sm font-light text-gray-400 mt-4">
